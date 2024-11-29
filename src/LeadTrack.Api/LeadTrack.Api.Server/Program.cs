@@ -1,4 +1,6 @@
 using LeadTrack.Infrastructure;
+using LeadTrack.Infrastructure.dataBase;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<LeadTrackContext>();
+    dbContext.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
