@@ -2,7 +2,8 @@
 {
     public enum StatusEnum
     {
-        Accepted = 0,
-        Refused = 1
+        Invited = 0,
+        Accepted = 1,
+        Refused = 2
     }
 }

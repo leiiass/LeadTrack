@@ -8,7 +8,7 @@ namespace LeadTrack.Infrastructure.dataBase
         public LeadTrackContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<LeadTrackContext>();
-            optionsBuilder.UseSqlServer("Data Source=INVENT125\\B1;User ID=sa;Password=sap@123;Initial Catalog=Lead;Encrypt=False");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-RCN2RNI;Initial Catalog=Lead;User ID=sa;Password=leia1234;Encrypt=False");
 
             return new LeadTrackContext(optionsBuilder.Options);
         }

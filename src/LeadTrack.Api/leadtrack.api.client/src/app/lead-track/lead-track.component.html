@@ -1,104 +1,150 @@
-<div class="container my-5">
-    <ul class="nav nav-tabs" id="leadTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="invited-tab" data-bs-toggle="tab" data-bs-target="#invited"
-                type="button" role="tab" aria-controls="invited" aria-selected="true">Invited
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button"
-                role="tab" aria-controls="accepted" aria-selected="false">Accepted</button>
-        </li>
-    </ul>
+<div class="container my-2">
+    <div class="btn-group nav nav-tabs" id="leadTabs" role="group">
+        <button type="button" id="invited-tab" class="nav-link active btn custom-btn-group" data-bs-toggle="tab" data-bs-target="#invited">Invited</button>
+
+        <button class="nav-link btn custom-btn-group" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button"
+        role="tab" aria-controls="accepted" aria-selected="false">Accepted</button>
+
+        <button class="nav-link btn custom-btn-group" id="declined-tab" data-bs-toggle="tab" data-bs-target="#declined" type="button"
+                role="tab" >Declined</button>
+      </div>
+
     <div class="tab-content mt-4" id="leadTabsContent">
         <!-- Invited Tab -->
         <div class="tab-pane fade show active" id="invited" role="tabpanel" aria-labelledby="invited-tab">
-            <div class="card mb-3">
+            <div *ngFor="let lead of invitedLeads" class="card mb-3">
                 <div class="card-body">
-
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex gap-2 w-100 justify-content-start">
                         <div class="initial-circle d-flex align-items-center justify-content-center">
-                          <span>B</span>
+                            <span>{{ lead.contactFirstName[0] }}</span>
                         </div>
-                      
                         <div>
-                            <h5 class="mb-0" style="margin-bottom: 0.2rem;">Bill</h5>
-                            <small class="text-muted me-4">January 4 2:37 pm</small>
+                            <h6 class="row g-1">{{ lead.contactFirstName }}</h6>
+                            <small class="row g-1">{{ lead.dateCreated | date:'longDate' }}</small>
                         </div>
                     </div>
-
-
-                    <div class="d-flex justify-content-start pb-3">
+                    <hr class="hr hr-blurry" />
+                    <div class="d-flex justify-content-start pb-2">
                         <div class="d-flex align-items-center me-4">
                             <i class="bi bi-geo-alt"></i>
-                            <span>Yanderra 2574</span>
+                            <span>{{ lead.suburb }}</span>
                         </div>
-                      
                         <div class="d-flex align-items-center me-4">
-                          <i class="bi bi-briefcase me-2"></i>
-                          <span>Painters</span>
+                            <i class="bi bi-briefcase me-2"></i>
+                            <span>{{ lead.category }}</span>
                         </div>
-                      
                         <div class="d-flex align-items-center">
-                          <span>Job ID:</span>
-                          <span class="ms-2">5577421</span>
+                            <span>Job ID:</span>
+                            <span class="ms-2">{{ lead.id }}</span>
                         </div>
-                      </div>
-                      
-                   
+                    </div>
+                    <hr class="hr hr-blurry" />
+                    <div class="d-flex justify-content-start">
+                        <div class="d-flex align-items-center me-4">
+                            <p>{{ lead.description }}</p>
+                        </div>
+                    </div>
+                    <hr class="hr hr-blurry" />
                     <div class="d-flex justify-content-start align-items-center">
-                        <button class="btn custom-btn square-btn">Accept</button>
-                        <button class="btn ms-1 btn-secondary square-btn">Decline</button>
-                        <span class="ms-1 text-muted">$62.00 Lead Invitation</span>
+                        <button (click)="onClickingAccept(lead.id)" class="btn custom-btn square-btn">Accept</button>
+                        <button (click)="onClickingDecline(lead.id)" class="btn ms-1 btn-secondary square-btn">Decline</button>
+                        <span class="ms-1 text-muted">${{ lead.price | number:'1.2-2' }} Lead Invitation</span>
                     </div>
                 </div>
             </div>
-
-            <div class="card mb-3">
-                <div class="card-body">
-
-                    <div class="d-flex align-items-center">
-                        <div class="initial-circle d-flex align-items-center justify-content-center">
-                          <span>C</span>
-                        </div>
-                      
-                        <div>
-                            <h5 class="mb-0" style="margin-bottom: 0.2rem;">Craig</h5>
-                            <small class="text-muted me-4">January 4 1:15 pm</small>
-                        </div>
-                    </div>
-
-
-                    <div class="d-flex justify-content-start pb-3">
-                        <div class="d-flex align-items-center me-4">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>Yanderra 2574</span>
-                        </div>
-                      
-                        <div class="d-flex align-items-center me-4">
-                          <i class="bi bi-briefcase me-2"></i>
-                          <span>Painters</span>
-                        </div>
-                      
-                        <div class="d-flex align-items-center">
-                          <span>Job ID:</span>
-                          <span class="ms-2">5577421</span>
-                        </div>
-                      </div>
-                      
-                   
-                    <div class="d-flex justify-content-start align-items-center">
-                        <button class="btn custom-btn square-btn">Accept</button>
-                        <button class="btn ms-1 btn-secondary square-btn">Decline</button>
-                        <span class="ms-1 text-muted">$62.00 Lead Invitation</span>
-                    </div>
-                </div>
-            </div>
-            
         </div>
 
+        <!-- Accepted Tab -->
         <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
-            <p>No accepted leads yet.</p>
+            <div *ngFor="let lead of acceptedLeads" class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-2 w-100 justify-content-start">
+                        <div class="initial-circle d-flex align-items-center justify-content-center">
+                            <span>{{ lead.contactFirstName[0] }}</span>
+                        </div>
+                        <div>
+                            <h6 class="row g-1">{{ lead.contactFirstName }} {{ lead.contactFullName }}</h6>
+                            <small class="row g-1">{{ lead.dateCreated | date:'longDate' }}</small>
+                        </div>
+                    </div>
+                    <hr class="hr hr-blurry" />
+                    <div class="d-flex justify-content-start">
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>{{ lead.suburb }}</span>
+                        </div>
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-briefcase me-2"></i>
+                            <span>{{ lead.category }}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>Job ID:</span>
+                            <span class="ms-2">{{ lead.id }}</span>
+                        </div>
+                    </div>
+                    <hr class="hr hr-blurry" />
+                    <div class="d-flex justify-content-start">
+                        <div class="d-flex align-items-center">
+                            <p>{{ lead.description }}</p>
+                        </div>
+                    </div>
+                    <hr class="hr hr-blurry" />
+                    <div class="d-flex justify-content-start">
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-telephone me-2"></i>
+                            <span class="text-custom">{{ lead.contactPhoneNumber }}</span>
+                        </div>
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-envelope me-2"></i>
+                            <span class="text-custom">{{ lead.contactEmail }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Declined Tab -->
+        <div class="tab-pane fade" id="declined" role="tabpanel" aria-labelledby="declined-tab">
+            <div *ngFor="let lead of declinedLeads" class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex gap-2 w-100 justify-content-start">
+                        <div class="initial-circle d-flex align-items-center justify-content-center">
+                            <span>{{ lead.contactFirstName[0] }}</span>
+                        </div>
+                        <div>
+                            <h6 class="row g-1">{{ lead.contactFirstName }}</h6>
+                            <small class="row g-1">{{ lead.dateCreated | date:'longDate' }}</small>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start pb-3">
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-geo-alt"></i>
+                            <span>{{ lead.suburb }}</span>
+                        </div>
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-briefcase me-2"></i>
+                            <span>{{ lead.category }}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span>Job ID:</span>
+                            <span class="ms-2">{{ lead.id }}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-start pb-3">
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-telephone"></i>
+                            <span>{{ lead.contactPhoneNumber }}</span>
+                        </div>
+                        <div class="d-flex align-items-center me-4">
+                            <i class="bi bi-envelope"></i>
+                            <span>{{ lead.contactEmail }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

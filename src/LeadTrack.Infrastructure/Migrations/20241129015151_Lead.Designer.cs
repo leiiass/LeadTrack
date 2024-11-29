@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeadTrack.Infrastructure.Migrations
 {
     [DbContext(typeof(LeadTrackContext))]
-    [Migration("20241128002518_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241129015151_Lead")]
+    partial class Lead
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,7 +60,7 @@ namespace LeadTrack.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Status")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("Suburb")
@@ -69,7 +69,7 @@ namespace LeadTrack.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Leads");
+                    b.ToTable("Lead");
 
                     b.HasData(
                         new
@@ -80,6 +80,7 @@ namespace LeadTrack.Infrastructure.Migrations
                             DateCreated = new DateTime(2023, 1, 4, 2, 37, 0, 0, DateTimeKind.Unspecified),
                             Description = "Need to paint 2 aluminum windows and a sliding glass door",
                             Price = 62.00m,
+                            Status = 0,
                             Suburb = "Yanderra 2574"
                         },
                         new
@@ -90,6 +91,7 @@ namespace LeadTrack.Infrastructure.Migrations
                             DateCreated = new DateTime(2023, 1, 4, 1, 15, 0, 0, DateTimeKind.Unspecified),
                             Description = "Internal walls 3 colours",
                             Price = 49.00m,
+                            Status = 0,
                             Suburb = "Woolooware 2230"
                         },
                         new
@@ -102,6 +104,7 @@ namespace LeadTrack.Infrastructure.Migrations
                             DateCreated = new DateTime(2018, 9, 5, 10, 36, 0, 0, DateTimeKind.Unspecified),
                             Description = "Plaster exposed brick walls (see photos), square off 2 archways (see photos), and expand pantry (see photos).",
                             Price = 49.00m,
+                            Status = 1,
                             Suburb = "Woolooware 2230"
                         },
                         new
@@ -115,6 +118,7 @@ namespace LeadTrack.Infrastructure.Migrations
                             DateCreated = new DateTime(2018, 8, 30, 11, 14, 0, 0, DateTimeKind.Unspecified),
                             Description = "There is a two story building at the front of the main house that's about 10x5 that would like to convert into self contained living area.",
                             Price = 32.00m,
+                            Status = 1,
                             Suburb = "Quinns Rocks 6030"
                         });
                 });

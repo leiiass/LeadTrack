@@ -14,6 +14,6 @@ namespace LeadTrack.Domain.models
         public string Category { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public StatusEnum? Status { get; set; }
+        public StatusEnum Status { get; set; }
     }
 }

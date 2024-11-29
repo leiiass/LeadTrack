@@ -5,7 +5,7 @@ namespace LeadTrack.Infrastructure.dataBase
 {
     public class LeadTrackContext : DbContext
     {
-        public DbSet<Lead> Leads { get; set; }
+        public DbSet<Lead> Lead { get; set; }
         public LeadTrackContext(DbContextOptions<LeadTrackContext> options) : base(options)
         {
             
@@ -25,6 +25,7 @@ namespace LeadTrack.Infrastructure.dataBase
                     Category = "Painters",
                     Description = "Need to paint 2 aluminum windows and a sliding glass door",
                     Price = 62.00m,
+                    Status = StatusEnum.Invited,
                 },
                 new Lead
                 {
@@ -35,6 +36,7 @@ namespace LeadTrack.Infrastructure.dataBase
                     Category = "Interior Painters",
                     Description = "Internal walls 3 colours",
                     Price = 49.00m,
+                    Status = StatusEnum.Invited,
                 },
                 new Lead
                 {
@@ -47,6 +49,7 @@ namespace LeadTrack.Infrastructure.dataBase
                     Category = "Interior Painters",
                     Description = "Plaster exposed brick walls (see photos), square off 2 archways (see photos), and expand pantry (see photos).",
                     Price = 49.00m,
+                    Status = StatusEnum.Accepted,
                 },
                 new Lead
                 {
@@ -60,6 +63,7 @@ namespace LeadTrack.Infrastructure.dataBase
                     Category = "Home Renovations",
                     Description = "There is a two story building at the front of the main house that's about 10x5 that would like to convert into self contained living area.",
                     Price = 32.00m,
+                    Status = StatusEnum.Accepted,
                 }
             );
         }

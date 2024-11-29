@@ -1,4 +1,5 @@
-﻿using LeadTrack.Services.services;
+﻿using LeadTrack.Domain.models;
+using LeadTrack.Services.services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LeadTrack.Api.Server.Controllers
@@ -16,13 +17,36 @@ namespace LeadTrack.Api.Server.Controllers
         [HttpGet]
         public OkObjectResult GetLeads()
         {
-            return Ok("");
+            var leads = _leadService.GetAll();
+            return Ok(leads);
         }
 
-        [HttpPatch]
-        public NoContentResult UpdateLeads()
+        [HttpPatch("{id}")]
+        public IActionResult UpdateLead(int id, [FromBody] StatusEnum status)
         {
-            return NoContent();
+            try
+            {
+                _leadService.UpdateLead(id, status);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/download")]
+        public IActionResult DownloadLeadFile(int id)
+        {
+            try
+            {
+                var fileBytes = _leadService.GenerateLeadFile(id);
+                return File(fileBytes, "text/plain", $"Lead_{id}_Accepted.txt");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

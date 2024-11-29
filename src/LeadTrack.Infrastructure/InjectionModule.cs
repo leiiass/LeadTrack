@@ -16,8 +16,10 @@ namespace LeadTrack.Infrastructure
 
             services.AddScoped<ILeadRepository, LeadRepository>();
             services.AddScoped<LeadService>();
+            services.AddScoped<FileService>();
 
             return services;
         }
+
     }
 }

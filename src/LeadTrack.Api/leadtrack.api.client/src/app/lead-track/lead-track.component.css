@@ -18,3 +18,13 @@
 .square-btn {
     border-radius: 0;
 }
+
+.text-custom{
+    color: #ff8e07;
+    font-weight: bold;
+}
+
+.custom-btn-group{
+    background-color: hsl(20, 6%, 90%);
+    color: rgb(0, 0, 0);
+}
