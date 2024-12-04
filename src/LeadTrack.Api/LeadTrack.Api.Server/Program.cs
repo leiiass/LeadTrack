@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-const string connectionString = "Data Source=*********;Initial Catalog=Lead;User ID=sa;Password=************;Encrypt=False";
+const string connectionString = "Data Source=DESKTOP-RCN2RNI;Initial Catalog=Lead;User ID=sa;Password=leia1234;Encrypt=False";
 builder.Services.AddInfrastructure(connectionString);
 
 builder.Services.AddCors(options =>
